@@ -21,6 +21,8 @@ print "Waiting for connections..."
 # Step 4: Listen for connections
 s.listen(5)  # 5 is max num of pending connections in queue
 
+# FIXME so far it will service a single client at a time. Ch. 20-22 will show alternatives
+# (forking/threading/async)
 # FIXME how do we service multiple clients simultaneously with this?
 # Step 5:
 while 1:
@@ -38,6 +40,7 @@ while 1:
 
     try:
         clientsock, clientaddr = s.accept()
+        #FIXME why does this close previous client socket/connection on accepting a new one?
     except KeyboardInterrupt:
         raise
     except:
