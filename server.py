@@ -8,9 +8,7 @@ host = ''  # bind to all interfaces
 port = 54321  # can also use port 80 etc others if run as root
 
 # Step 1: create socket
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # same socket object as for client
-                                                       # use AF_INET6 for binding to an IPv6 address
-                                                       # or AF_UNSPEC to support both
+s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 
 # Step 2: set socket options
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # release the port as soon as process terminates/socket is closed
@@ -29,6 +27,7 @@ while 1:
     # FIXME this spawns a new socket. Is it already enough to service multiple connections
     # at the same time? How is it done? it doesn't seem to spawn a new process (at least not
     # by the current user)
+    # this is b/c TCP is not connectionless (unlike UDP). what does it mean exactly?
     # FIXME the program is /blocked/ waiting for any client to connect
     # once /any/ client connects, it will __do something__ with a new socket
     # and be blocked again, until another client connects (?)
