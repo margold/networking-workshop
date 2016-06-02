@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# TCP server
+# a simple TCP echo server
 
 import socket, traceback
 
@@ -49,6 +49,12 @@ while 1:
 
     try:
         print "Got connection from", clientsock.getpeername()
+        while 1:
+            data = clientsock.recv(4096)
+            if not len(data):
+                break
+            clientsock.sendall(data)
+
         # process the request here. it might call sys.exit() which is caught and re-raised
         # in the next except block
     except (KeyboardInterrupt, SystemExit):
