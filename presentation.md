@@ -40,6 +40,8 @@ Globals:
 
 ???
 
+=> FIXME I/O refers to: stdout/stdin/stderr, filesystem I/O (these are the things I've been asked and couldn't answer)
+
 Explanation:
 - Things we half-understand on stackoverflow <= FIXME
 - "I promise you that you'll know what all of this is in one hour"
@@ -71,9 +73,13 @@ background-image: url(images/Linux_kernel_System_Call_Interface_and_glibc.svg.pn
 
 Teaching notes:
 - Motivation for this slide: "How does one write to file or use the keyboard or talk to the network card?" - "Kernel API?" - "What is the kernel API?" - At which point you can introduce the C Standard Library as one option for a "kernel API".
+=> FIXME IFFs
+=> FIXME potentially: why knowing C
 
 Explanations:
 - One communicates with the kernel via system calls. <= FIXME find out more
+=> FIXME system command (see man ) vs syscalls
+=> FIXME system calls (htop as an example): SIGKILL, SIGHUP, etc
 
 C Standard Library:
 - Many apps won't communicate with the kernel directly. Instead, they will use low-level libraries that their programming language provides.
@@ -87,6 +93,7 @@ C Standard Library:
 ---
 
 ![Default-aligned image](images/client-server.png)
+=> FIXME server-client example: name the hosts (1 and 2)
 
 ### Exercise #1
 1. Open a web browser
@@ -113,6 +120,7 @@ Post-Exercise 1:
 	4. Sockets are a concept, but are shown as files on Unix.
 - "You also might have heard of `netstat`, maybe because you once followed a network security tutorial. It does the same thing as `lsof`, but has less options."
 <= FIXME put ps on cheat sheet with correct flags for OSX and Linux
+=> "everything is a file in Unix" mostly means it shows up in the filesystem (look up and confirm)
 
 Post-Exercise 2:
 - This is a good moment to talk about TCP.
