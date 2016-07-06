@@ -53,7 +53,7 @@ while 1:
             data = clientsock.recv(4096)
             if not len(data):
                 break
-            clientsock.sendall(data)
+            clientsock.sendall(data) # send back "Thank you" instead: polite socket-based server
 
         # process the request here. it might call sys.exit() which is caught and re-raised
         # in the next except block

@@ -1,12 +1,18 @@
-TOC/General structure
-From ... up to (not including) HTTP
+**Presentations is a subset of vizualization problems!**
+
+https://github.com/emilyxxie/gits_guts_commands/blob/master/git_cheat_sheet.pdf
+
+TODO:
+- ppl already been asking if I'm doing DNS. I also should do SSL/TLS, hopefully before Yan's residence starts
 
 # Motivation
 show server code using urllib2 or requests or similar - what happens under the hood?
 also, it will make you understand a bunch of concepts and weird error messages
+----
+In case of Python, the low-level functionality is actually implemented in glibc (GNU C Library) and used by Python. (in case of CPython? what about other Python implementations?)
 
 # First things first: Tools
-telnet
+telnet (& telnet -u for unix sockets?)
 traceroute
 dig
 nc
@@ -74,7 +80,3 @@ do spawned sockets each get their own port?
 
 # Where is it used?
 e.g. python's httplib establishes http connections using sockets, and is in turn used by urllib2.Request; requests library (popular 3rd party library) uses sockets to establish connections as well; look for `import socket`; urllib is in turn used by cherrypy (a small python web framework) and others
-
-# Workshop
-Alena Kuczynski, Rachel, Ye Eun, there were a couple guys I don't remember
-said I will announce it start of next week
