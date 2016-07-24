@@ -1,13 +1,11 @@
-# Attention - commands not suitable for Linux! (yet)
-
----
-
 ```python
 >>> import requests
 >>> r = requests.get('http://api.fixer.io/latest')
 ```
 
 ???
+
+=> FIXME major flaw: integrate security into this talk (as per https://xi.hope.net/schedule.html#-computer-science-curricula-s-failure-what-can-we-do-now-)
 
 Motivation:
 - "If you have worked with client or server applications, you know how to send or receive data from the internet in a high-level language. And you know that your laptop receives the data on the Wi-Fi adapter. But how does the data get from the Wi-Fi adapter to your Python application?"
@@ -34,8 +32,6 @@ Globals:
 **And even more things:**
 - (g)libc
 - kernel
-- file descriptors
-- I/O
 - Unix vs Linux
 
 ???
@@ -65,21 +61,21 @@ And even more things:
 
 ---
 
-background-image: url(images/Linux_kernel_System_Call_Interface_and_glibc.svg.png)
-
-<= FIXME replace GNU C with C Standard Library in the image
+![Default-aligned image](images/Linux_kernel_System_Call_Interface_and_glibc.svg.png)
 
 ???
 
+=> FIXME replace GNU C with C Standard Library in the image
+
 Teaching notes:
 - Motivation for this slide: "How does one write to file or use the keyboard or talk to the network card?" - "Kernel API?" - "What is the kernel API?" - At which point you can introduce the C Standard Library as one option for a "kernel API".
-=> FIXME IFFs
-=> FIXME potentially: why knowing C
 
 Explanations:
-- One communicates with the kernel via system calls. <= FIXME find out more
-=> FIXME system command (see man ) vs syscalls
-=> FIXME system calls (htop as an example): SIGKILL, SIGHUP, etc
+- One communicates with the kernel via system calls.
+- Sys calls are the interface between the processes and operating system (i.e. the kernel)
+- Services one can request from the kernel include accessing a hard-drive, creating a process, etc.
+(Good explanation can be found here: http://man7.org/linux/man-pages/man2/syscalls.2.html)
+- Eg. `kill` command sends system calls with a specific process signal.
 
 C Standard Library:
 - Many apps won't communicate with the kernel directly. Instead, they will use low-level libraries that their programming language provides.
@@ -90,10 +86,14 @@ C Standard Library:
 - There are many more alternative implementations, eg. for embedded devices, or just lightweight or less complex in general.
 - You will also hear about OSs that they're "mostly POSIX-complient".
 
+Commonly Asked Questions With Short Answers:
+- These go too much in detail, so don't explain this by default, unless somebody asks.
+- Q: Tell me more about Python-C bindings. A: [FFIs (Foreign Function Interfaces)](https://en.wikipedia.org/wiki/Foreign_function_interface).
+- Q: Is knowing C important to work with Unix? A: FIXME
+
 ---
 
 ![Default-aligned image](images/client-server.png)
-=> FIXME server-client example: name the hosts (1 and 2)
 
 ### Exercise #1
 1. Open a web browser
@@ -109,7 +109,7 @@ Diagram Explanations:
 
 Teaching Notes:
 - Familiar numbers will include: `80/443`, `192.168.*.*`/`10.0.*.*`, `IPv4`/`IPv6` (`tcp4`/`tcp6`)
-<= FIXME read up on local IP ranges and the difference between 192.168 and 10.0 range (the latter is larger?)
+- Private IPv4 address spaces: 10.0.0.0 - 10.255.255.255, 172.16.0.0 - 172.31.255.255, 192.168.0.0 - 192.168.255.255. IP packets addressed from these addresses cannot be transmitted through the public Internet.
 
 Post-Exercise 1:
 - "So, what did we just do? You're all familiar with `ps` (run `ps`, talk about what information it shows), and `lsof` is the same concept, but for files."
@@ -119,8 +119,15 @@ Post-Exercise 1:
 	3. The combination of IP-port that you just saw is called a 'socket'.
 	4. Sockets are a concept, but are shown as files on Unix.
 - "You also might have heard of `netstat`, maybe because you once followed a network security tutorial. It does the same thing as `lsof`, but has less options."
-<= FIXME put ps on cheat sheet with correct flags for OSX and Linux
-=> "everything is a file in Unix" mostly means it shows up in the filesystem (look up and confirm)
+- Mention Unix domain sockets and that they're different from the network sockets.
+
+- "everything is a file in Unix" means
+	1. it shows up in the filesystem
+	2. share some standard metadata: access permissions, owners
+	3. can often be read/written to with the same tools as normal files (eg. `cat`), but your success may vary.
+More info here:
+- http://unix.stackexchange.com/questions/141016/a-laymans-explanation-for-everything-is-a-file-what-differs-from-windows
+- http://www.freebsd.org/doc/en/articles/linux-users/procfs.html
 
 Post-Exercise 2:
 - This is a good moment to talk about TCP.
@@ -131,8 +138,7 @@ Post-Exercise 2:
 - TCP and IP are two of these layers. We say that TCP is "on top of" IP.
 - Another protocol that might be on top of IP is UDP, which you also might have heard of.
 - Below IP is the link layer, which is responsible for getting the data to ???.
-=> FIXME read up on what IP and TCP packets actually carry to confirm my explanations are right
-=> FIXME fix the point about the link layer
+=> FIXME something about the link layer
 
 Teaching Notes:
 - Draw: [ http -> tcp -> ip -> link layer ]
@@ -148,7 +154,6 @@ To Sum Up, We Now Know:
 6. python server/requests model
 - \+ the same on the other side of the connection
 - Draw this stack on whiteboard or paper.
-=> FIXME confirm the pid-socket table
 
 Commonly Asked Questions With Short Answers:
 - These go too much in detail, so don't explain this by default, unless somebody asks.
