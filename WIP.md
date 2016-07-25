@@ -1,4 +1,5 @@
-# Tools
+# Tools and notes-to-self
+
 telnet
 traceroute
 dig
@@ -17,7 +18,7 @@ netcat/tcpdump
 FIXME: telnet vs curl?
 
 # Looking at where network sockets are created
-./tcp-server.py  # start a server (alternative: with telnet/socat/something else? i.e., code-less)
+./tcp-server.py  # start a server (alternative: with netcat/socat/something else? i.e., code-less)
 on linux:
 PID=`pgrep python`; ls -lh /proc/$PID  # will contain the socket file
 on OSX:
@@ -45,17 +46,3 @@ udp server: socket - opts - bind - recvfrom/sendto
 The GNU C Library Reference Manual: http://www.gnu.org/software/libc/manual/html_node/Sockets.html
 
 use "broken pipe" somewhere as an example
-
-# inetd/launchd
-My inetd-style launchd plist file for `/Users/margold/RC/networking/inetd-server.py` is in `~/Library/LaunchAgents/margold.inetd.server.plist`.
-It can be launched with `launchctl load $path` and talked to with `telnet localhost 12345`
-Documentation is here: https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html
-Some more ideas are here: http://paul.annesley.cc/2012/09/mac-os-x-launchd-is-cool/
-
-# Qs
-write same server in a different language? Haskell? Probably for later this week, or the week after
-looks like I need to understand pipes in order to understand stream sockets better
-implement something small with sockets (chat client? there must be tutorials for this)
-
-# Thursday
-kernel networking security issues mini-talk?
