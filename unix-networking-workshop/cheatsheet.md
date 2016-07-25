@@ -60,7 +60,3 @@ python -m SimpleHTTPServer <port>
 # to a server at host:port
 telnet <host> <port>
 ```
-
----
-
-# Exercise #4
